@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <iostream>
 
+#pragma pack(push)
 #pragma pack(2)
 
 typedef struct _BMP_Header_Structure{
@@ -36,6 +37,8 @@ typedef struct _BMP_ColorMap_Structure {
 	uint8_t Reserved;
 } BMP_ColorMap_Typedef_t;
 
+#pragma pack(pop)
+
 typedef uint32_t BMP_ColorMapCount_Typedef_t;
 
 
@@ -52,8 +55,17 @@ public:
 	~_BMP_Class();
 
 	int open(const char *filePath);
+	int read(void *des, size_t size);
+	int seek(uint32_t offset);
 	int read_format();
-	int check_format();
+	/**
+	 * Brief: 按照定义严格性判断文件是否符合要求，
+	          以达到后期扩展如：自动完成颜色转换的功能
+			                    自动完成画布延伸
+			  而不再严格要求图片颜色深度为2位
+	 * Para: @level = 0; 要求 宽高为600*800 或 800*600, 颜色深度2位
+	 */
+	int check_format(int level);
 	int close();
 
 	// Information Get
@@ -99,5 +111,6 @@ public:
 	uint32_t get_ClrUsed();
 
 } BMP;
+
 
 #endif
