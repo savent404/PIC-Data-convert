@@ -3,9 +3,9 @@
 
 #include "stdafx.h"
 #include "BMP.hpp"
+#include "DTA.hpp"
 
-
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG
 void testFunc(void);
@@ -29,39 +29,52 @@ int main(int argc, char *argv[])
 		if (argc != 3) {
 			printf("No FIlePath!!!\n");
 			printHelp();
+			return 0;
 		}
 		BMP bmp(argv[2]);
 		bmp.read_format();
-		printInfo(bmp);
+		printInfo(&bmp);
+	}
+
+	else if (!strcmp(argv[1], "-T1")) {
+		if (argc != 4) {
+			printf("Wrong Parameter!!!\n");
+			printHelp();
+			return 0;
+		}
+		BMP bmp(argv[2]);
+		bmp.read_format();
+		if (!checkInfo(&bmp))
+		{
+			DTA dta(DTA_2BPP);
+			char buffer[400];
+			dta.create(argv[3]);
+			
+			//每次读取一行
+			for (int i = 0; i < 600; i++)
+			{
+				bmp.read(buffer, 400);
+				dta.write(buffer, 400);
+			}
+			printf("Convert compelet\n");
+			dta.close();
+			return 0;
+		}
+	}
+
+	else if (!strcmp(argv[1], "-T2")) {
+		printf("尚未开发，敬请期待\n");
+		return 0;
+	}
+	else {
+		printf("错误的参数\n");
+		printHelp();
+		return 0;
 	}
 #endif
     return 0;
 }
 
-void testFunc(void)
-{
-	BMP bmp("F:\\BUFFER\\tmp1.bmp");
-	bmp.read_format();
-	if (!checkInfo(&bmp))
-	{
-		int i, j;
-		int cnt = 0;
-		char byte;
-		printf("File Data:\n");
-		for (i = 0; i < bmp.get_h(); i++)
-		{
-			for (j = 0; j < bmp.get_w(); j++)
-			{
-				bmp.read(&byte, 1);
-				printf("%02X ", byte);
-				if (++cnt > 20)
-				{
-					putchar('\n'); cnt = 0;
-				}
-			}
-		}
-	}
-}
 
 void printHelp(void)
 {
