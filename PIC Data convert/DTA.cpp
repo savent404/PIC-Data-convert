@@ -3,11 +3,16 @@
 
 uint8_t _DTA_Class::convert_2BPP22BPP(uint16_t data)
 {
+	//for (int i = 0; i < 4; i++) {
+	//	uint8_t buf = (data >> (i * 4)) & 0x03;
+	//	ret |= (buf << (i * 2));
+	//}
 	uint8_t ret = 0;
-	for (int i = 0; i < 4; i++) {
-		uint8_t buf = (data >> (i * 4)) & 0x03;
-		ret |= (buf << (i * 2));
-	}
+
+	ret |= ((data & 0x3000) >> 12) << 2;
+	ret |= ((data & 0x0300) >> 8) << 0;
+	ret |= ((data & 0x0030) >> 4) << 6;
+	ret |= ((data & 0x0003) >> 0) << 4;
 	return uint8_t(ret);
 }
 
@@ -57,7 +62,7 @@ void _DTA_Class::write(void * src, size_t size)
 		for (size_t i = 0; i < size; i+=2) {
 			*dpt = convert_2BPP22BPP(*(uint16_t*)spt);
 			dpt += 1;
-			spt += 1;
+			spt += 2;
 		}
 		real_size = size / 2;
 		break;
