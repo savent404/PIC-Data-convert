@@ -9,25 +9,25 @@
 #pragma pack(2)
 
 typedef struct _BMP_Header_Structure{
-	char bfType[2];		//Î»Í¼ÎÄ¼şÀàĞÍ
-	uint32_t bfSize;	//Î»Í¼ÎÄ¼ş´óĞ¡
-	uint16_t Reserved1;	//±£Áô
-	uint16_t Reserved2;	//±£Áô
-	uint32_t bfOffBits; //Î»Í¼Êı¾İÆğÊ¼Î»ÖÃ
+	char bfType[2];		//ä½å›¾æ–‡ä»¶ç±»å‹
+	uint32_t bfSize;	//ä½å›¾æ–‡ä»¶å¤§å°
+	uint16_t Reserved1;	//ä¿ç•™
+	uint16_t Reserved2;	//ä¿ç•™
+	uint32_t bfOffBits; //ä½å›¾æ•°æ®èµ·å§‹ä½ç½®
 }BMP_Header_Typedef_t;
 
 typedef struct _BMP_Info_Structure {
-	uint32_t biSize;	//±¾½á¹¹ÌåÕ¼ÓÃ×Ö½Ú
-	uint32_t biWith;	//Î»Í¼¿í¶È
-	uint32_t biHeight;	//Î»Í¼¸ß¶È
-	uint16_t biPlanes;	//Ä¿±êÉè±¸µÄ¼¶±ğ
-	uint16_t biBitCount;//ÏñËØÎ»Êı
-	uint32_t biCompression;//Ñ¹ËõÀàĞÍ
-	uint32_t biSizeImage;//Î»Í¼´óĞ¡£¬°üº¬×Ö½Ú¶ÔÆëµÄ¿Õ×Ö½Ú
-	uint32_t biXPelsPerMeter;//Î»Í¼Ë®Æ½·Ö±æÂÊ
-	uint32_t biYPelsPerMeter;//Î»Í¼´¹Ö±·Ö±æÂÊ
-	uint32_t biClrUsed;	//Î»Í¼Êµ¼ÊÊ¹ÓÃµÄÑÕÉ«±íÖĞµÄÑÕÉ«Êı
-	uint32_t biClrImportant;//Î»Í¼ÏÔÊ¾¹ı³ÌÖĞÖØÒªµÄÑÕÉ«Êı
+	uint32_t biSize;	//æœ¬ç»“æ„ä½“å ç”¨å­—èŠ‚
+	uint32_t biWith;	//ä½å›¾å®½åº¦
+	uint32_t biHeight;	//ä½å›¾é«˜åº¦
+	uint16_t biPlanes;	//ç›®æ ‡è®¾å¤‡çš„çº§åˆ«
+	uint16_t biBitCount;//åƒç´ ä½æ•°
+	uint32_t biCompression;//å‹ç¼©ç±»å‹
+	uint32_t biSizeImage;//ä½å›¾å¤§å°ï¼ŒåŒ…å«å­—èŠ‚å¯¹é½çš„ç©ºå­—èŠ‚
+	uint32_t biXPelsPerMeter;//ä½å›¾æ°´å¹³åˆ†è¾¨ç‡
+	uint32_t biYPelsPerMeter;//ä½å›¾å‚ç›´åˆ†è¾¨ç‡
+	uint32_t biClrUsed;	//ä½å›¾å®é™…ä½¿ç”¨çš„é¢œè‰²è¡¨ä¸­çš„é¢œè‰²æ•°
+	uint32_t biClrImportant;//ä½å›¾æ˜¾ç¤ºè¿‡ç¨‹ä¸­é‡è¦çš„é¢œè‰²æ•°
 } BMP_Info_Typedef_t;
 
 typedef struct _BMP_ColorMap_Structure {
@@ -59,11 +59,11 @@ public:
 	int seek(uint32_t offset);
 	int read_format();
 	/**
-	 * Brief: °´ÕÕ¶¨ÒåÑÏ¸ñĞÔÅĞ¶ÏÎÄ¼şÊÇ·ñ·ûºÏÒªÇó£¬
-	          ÒÔ´ïµ½ºóÆÚÀ©Õ¹Èç£º×Ô¶¯Íê³ÉÑÕÉ«×ª»»µÄ¹¦ÄÜ
-			                    ×Ô¶¯Íê³É»­²¼ÑÓÉì
-			  ¶ø²»ÔÙÑÏ¸ñÒªÇóÍ¼Æ¬ÑÕÉ«Éî¶ÈÎª2Î»
-	 * Para: @level = 0; ÒªÇó ¿í¸ßÎª600*800 »ò 800*600, ÑÕÉ«Éî¶È2Î»
+	 * Brief: æŒ‰ç…§å®šä¹‰ä¸¥æ ¼æ€§åˆ¤æ–­æ–‡ä»¶æ˜¯å¦ç¬¦åˆè¦æ±‚ï¼Œ
+	          ä»¥è¾¾åˆ°åæœŸæ‰©å±•å¦‚ï¼šè‡ªåŠ¨å®Œæˆé¢œè‰²è½¬æ¢çš„åŠŸèƒ½
+			                    è‡ªåŠ¨å®Œæˆç”»å¸ƒå»¶ä¼¸
+			  è€Œä¸å†ä¸¥æ ¼è¦æ±‚å›¾ç‰‡é¢œè‰²æ·±åº¦ä¸º2ä½
+	 * Para: @level = 0; è¦æ±‚ å®½é«˜ä¸º600*800 æˆ– 800*600, é¢œè‰²æ·±åº¦2ä½
 	 */
 	int check_format(int level);
 	int close();
@@ -71,42 +71,42 @@ public:
 	// Information Get
 
 	/**
-	 * Brief: µÃµ½ÎÄ¼ş´óĞ¡
+	 * Brief: å¾—åˆ°æ–‡ä»¶å¤§å°
 	 */
 	uint32_t get_file_size();
 
 	/**
-	 * Brief: µÃµ½Í¼Æ¬Êı¾İÆğÊ¼Æ«ÒÆÁ¿
+	 * Brief: å¾—åˆ°å›¾ç‰‡æ•°æ®èµ·å§‹åç§»é‡
 	 */
 	uint32_t get_data_addr();
 
 	/**
-	 * Brief: µÃµ½Í¼Æ¬¸ß¶È
+	 * Brief: å¾—åˆ°å›¾ç‰‡é«˜åº¦
 	 */
 	uint32_t get_h();
 
 	/**
-	 * Brief: µÃµ½Í¼Æ¬¿í¶È
+	 * Brief: å¾—åˆ°å›¾ç‰‡å®½åº¦
 	 */
 	uint32_t get_w();
 
 	/**
-	 * Brief: µÃµ½ÏñËØÎ»Êı
+	 * Brief: å¾—åˆ°åƒç´ ä½æ•°
 	 */
 	uint32_t get_BitCount();
 
 	/**
-	 * Brief: µÃµ½Î»Í¼´óĞ¡
+	 * Brief: å¾—åˆ°ä½å›¾å¤§å°
 	 */
 	uint32_t get_SizeImage();
 
 	/**
-	 * Brief: µÃµ½Ñ¹ËõÀàĞÍ
+	 * Brief: å¾—åˆ°å‹ç¼©ç±»å‹
 	 */
 	uint32_t get_Compression();
 
 	/**
-	 * Brief: µÃµ½Î»Í¼Ê¹ÓÃÑÕÉ«¸öÊı
+	 * Brief: å¾—åˆ°ä½å›¾ä½¿ç”¨é¢œè‰²ä¸ªæ•°
 	 */
 	uint32_t get_ClrUsed();
 
