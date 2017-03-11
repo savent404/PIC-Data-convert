@@ -81,6 +81,17 @@ public:
 	uint32_t get_data_addr();
 
 	/**
+	 * Brief: 得到行地址
+	 * Note:  行数大于零
+	 */
+	uint32_t get_range_addr(uint32_t range);
+
+	/**
+	 * Brief: 设定到行地址
+	 */
+	uint32_t set_range_addr(uint32_t range);
+
+	/**
 	 * Brief: 得到图片高度
 	 */
 	uint32_t get_h();

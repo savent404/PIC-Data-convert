@@ -23,6 +23,7 @@ public:
 	void set_format(DTA_FORMAT format);
 	void create(const char *FilePath);
 	void write(void *src, size_t size);
+	void write_string(const char* pt, size_t size);
 	void close();
 }DTA;
 

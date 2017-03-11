@@ -119,6 +119,17 @@ uint32_t _BMP_Class::get_data_addr()
 	return uint32_t(BMP_Header.bfOffBits);
 }
 
+uint32_t _BMP_Class::get_range_addr(uint32_t range)
+{
+	return uint32_t(get_data_addr() + (get_h() - range)*get_w()*get_BitCount()/8);
+}
+
+uint32_t _BMP_Class::set_range_addr(uint32_t range)
+{
+	int res = fseek(fBMP, get_range_addr(range), SEEK_SET);
+	return uint32_t(res);
+}
+
 uint32_t _BMP_Class::get_h()
 {
 	return uint32_t(BMP_Info.biHeight);

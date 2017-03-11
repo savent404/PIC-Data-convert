@@ -49,10 +49,10 @@ int main(int argc, char *argv[])
 			DTA dta(DTA_2BPP);
 			char buffer[400];
 			dta.create(argv[3]);
-			
 			//每次读取一行
 			for (int i = 0; i < 600; i++)
 			{
+				bmp.set_range_addr(i + 1);
 				bmp.read(buffer, 400);
 				dta.write(buffer, 400);
 			}

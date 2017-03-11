@@ -3,10 +3,6 @@
 
 uint8_t _DTA_Class::convert_2BPP22BPP(uint16_t data)
 {
-	//for (int i = 0; i < 4; i++) {
-	//	uint8_t buf = (data >> (i * 4)) & 0x03;
-	//	ret |= (buf << (i * 2));
-	//}
 	uint8_t ret = 0;
 
 	ret |= ((data & 0x3000) >> 12) << 2;
@@ -48,6 +44,7 @@ void _DTA_Class::set_format(DTA_FORMAT format)
 void _DTA_Class::create(const char * FilePath)
 {
 	fopen_s(&pf, FilePath, "w");
+	write_string("有项目联系QQ:1326841769", 32);
 }
 
 void _DTA_Class::write(void * src, size_t size)
@@ -70,6 +67,11 @@ void _DTA_Class::write(void * src, size_t size)
 		break;
 	}
 	fwrite(src, sizeof(char), real_size, pf);
+}
+
+void _DTA_Class::write_string(const char * pt, size_t size)
+{
+	fwrite(pt, sizeof(char), size, pf);
 }
 
 void _DTA_Class::close()
