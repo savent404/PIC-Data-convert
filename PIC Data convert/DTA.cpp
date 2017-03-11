@@ -49,7 +49,7 @@ void _DTA_Class::create(const char * FilePath)
 
 void _DTA_Class::write(void * src, size_t size)
 {
-	size_t real_size;
+	size_t real_size = 0;
 	uint8_t *dpt = (uint8_t*)src;
 	uint8_t *spt = (uint8_t*)src;
 
